@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.countdown {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("Notion Countdown Scrapbook(1).png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  display: flex;
+  gap: 35px;
+  margin-top: 40px;
+  color: #172c4c;
+  text-align: center;
+}
+
+.number {
+  font-size: clamp(38px, 6vw, 80px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.label {
+  font-size: clamp(10px, 1.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .timer {
+    gap: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="countdown">
+
+  <div class="timer">
+
+    <div>
+      <div class="number" id="days">00</div>
+      <div class="label">DAYS</div>
+    </div>
+
+    <div>
+      <div class="number" id="hours">00</div>
+      <div class="label">HOURS</div>
+    </div>
+
+    <div>
+      <div class="number" id="minutes">00</div>
+      <div class="label">MIN</div>
+    </div>
+
+    <div>
+      <div class="number" id="seconds">00</div>
+      <div class="label">SEC</div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const target = new Date("2026-10-15T20:00:00-04:00");
+
+function updateCountdown() {
+
+  const now = new Date();
+  const difference = target - now;
+
+  if (difference <= 0) {
+    document.querySelector(".timer").innerHTML =
+      '<div class="number">CHICUELOS BEST DAY EVER!!!! 🎉</div>';
+    return;
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
+
+  document.getElementById("days").textContent =
+    String(days).padStart(2, "0");
+
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+</script>
+
+</body>
+</html>

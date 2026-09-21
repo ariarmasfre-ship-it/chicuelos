@@ -1,118 +1,268 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background: #acd9f5;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.widget {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 1;
-    background: #acd9f5 url("./background.png") center center / 100% 100% no-repeat;
-    overflow: hidden;
-}
-
-.timer {
-  position: absolute;
-  left: 50%;
-  top: 58%;
-  transform: translate(-50%, -50%);
-
-  display: flex;
-  gap: 45px;
-
-  color: #172c4c;
-  text-align: center;
+body {
   font-family: Arial, sans-serif;
 }
 
+.countdown {
+  width: 100vw;
+  height: 100vh;
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.countdown {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("./background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  display: flex;
+  gap: 35px;
+  margin-top: 40px;
+  color: #172c4c;
+  text-align: center;
+}
+
 .number {
-  font-size: clamp(48px, 6vw, 78px);
-  font-weight: 900;
+  font-size: clamp(38px, 6vw, 80px);
+  font-weight: 800;
   line-height: 1;
-  text-shadow: 3px 3px 0px #8cc8eb;
 }
 
 .label {
-  font-size: clamp(11px, 1.3vw, 16px);
-  font-weight: 800;
+  font-size: clamp(10px, 1.4vw, 18px);
+  font-weight: 700;
   letter-spacing: 2px;
-  margin-top: 10px;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .timer {
+    gap: 15px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="widget">
+<div class="countdown">
 
-    <div class="timer">
+  <div class="timer">
 
-        <div>
-            <div class="number" id="days">00</div>
-            <div class="label">DAYS</div>
-        </div>
-
-        <div>
-            <div class="number" id="hours">00</div>
-            <div class="label">HOURS</div>
-        </div>
-
-        <div>
-            <div class="number" id="minutes">00</div>
-            <div class="label">MIN</div>
-        </div>
-
-        <div>
-            <div class="number" id="seconds">00</div>
-            <div class="label">SEC</div>
-        </div>
-
+    <div>
+      <div class="number" id="days">00</div>
+      <div class="label">DAYS</div>
     </div>
+
+    <div>
+      <div class="number" id="hours">00</div>
+      <div class="label">HOURS</div>
+    </div>
+
+    <div>
+      <div class="number" id="minutes">00</div>
+      <div class="label">MIN</div>
+    </div>
+
+    <div>
+      <div class="number" id="seconds">00</div>
+      <div class="label">SEC</div>
+    </div>
+
+  </div>
 
 </div>
 
 <script>
+
 const target = new Date("2026-10-15T20:00:00-04:00");
 
 function updateCountdown() {
-    const now = new Date();
-    const distance = target - now;
 
-    if (distance <= 0) {
-        document.querySelector(".timer").innerHTML =
-            '<div class="number">TODAY!!!!</div>';
-        return;
-    }
+  const now = new Date();
+  const difference = target - now;
 
-    const days = Math.floor(distance / 86400000);
-    const hours = Math.floor((distance % 86400000) / 3600000);
-    const minutes = Math.floor((distance % 3600000) / 60000);
-    const seconds = Math.floor((distance % 60000) / 1000);
+  if (difference <= 0) {
+    document.querySelector(".timer").innerHTML =
+      '<div class="number">CHICUELOS BEST DAY EVER!!!! 🎉</div>';
+    return;
+  }
 
-    document.getElementById("days").textContent =
-        String(days).padStart(2, "0");
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
 
-    document.getElementById("hours").textContent =
-        String(hours).padStart(2, "0");
+  document.getElementById("days").textContent =
+    String(days).padStart(2, "0");
 
-    document.getElementById("minutes").textContent =
-        String(minutes).padStart(2, "0");
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
 
-    document.getElementById("seconds").textContent =
-        String(seconds).padStart(2, "0");
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
 }
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+</script>
+
+</body>
+</html>
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  display: flex;
+  gap: 35px;
+  margin-top: 40px;
+  color: #172c4c;
+  text-align: center;
+}
+
+.number {
+  font-size: clamp(38px, 6vw, 80px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.label {
+  font-size: clamp(10px, 1.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .timer {
+    gap: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="countdown">
+
+  <div class="timer">
+
+    <div>
+      <div class="number" id="days">00</div>
+      <div class="label">DAYS</div>
+    </div>
+
+    <div>
+      <div class="number" id="hours">00</div>
+      <div class="label">HOURS</div>
+    </div>
+
+    <div>
+      <div class="number" id="minutes">00</div>
+      <div class="label">MIN</div>
+    </div>
+
+    <div>
+      <div class="number" id="seconds">00</div>
+      <div class="label">SEC</div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const target = new Date("2026-10-15T20:00:00-04:00");
+
+function updateCountdown() {
+
+  const now = new Date();
+  const difference = target - now;
+
+  if (difference <= 0) {
+    document.querySelector(".timer").innerHTML =
+      '<div class="number">CHICUELOS BEST DAY EVER!!!! 🎉</div>';
+    return;
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
+
+  document.getElementById("days").textContent =
+    String(days).padStart(2, "0");
+
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
 </script>
 
 </body>
